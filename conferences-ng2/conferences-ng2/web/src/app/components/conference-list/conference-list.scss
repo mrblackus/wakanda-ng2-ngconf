@@ -1,10 +1,29 @@
 :host {
+  
+  $bgColor: #FAFAFA;
+  
   .conf {
     border: 1px solid #acacac;
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0;
-    background: #FAFAFA;
+    background: $bgColor;
     color: black; 
+  }
+  
+  .clickable {
+    cursor: pointer;
+  }
+  
+  .clickable:hover {
+    background: darken($bgColor, 10%);
+  }
+  
+  .conf-detail {
+    text-align: left;
+    
+    h4 {
+      text-align: center;
+    }
   }
 }

@@ -9,14 +9,22 @@ import {WakandaService} from '../../services/wakanda';
 export class ConferenceList implements OnInit {
   
   public conferences: any[];
+  public currentConf: any;
   
   constructor(private _wakandaService: WakandaService) {
-    this.conferences = [{name: 'toto'}];
+    this.conferences = [];
+    this.currentConf = null;
+  }
+  
+  clickOnConf(c) {
+    this.currentConf = c;
+    console.log(c);
+    
   }
   
   ngOnInit() {
     this._wakandaService.catalog.then(c => {
-      c['Conference'].query().then(collection => {
+      c['Conference'].query({select: 'people'}).then(collection => {
           this.conferences = collection.entities;
       });
     });

@@ -1,5 +1,5 @@
 
 
 model.Person.info.onGet = function() {
-	return this.name + " " + this.tel;
+	return this.name + " " + (this.tel || "");
 };
