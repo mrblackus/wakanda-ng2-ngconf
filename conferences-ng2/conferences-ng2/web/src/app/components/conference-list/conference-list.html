@@ -1,4 +1,9 @@
-Conferences:
-<div *ngFor="#c of conferences">
-    {{c.name}}
+<div class="row">
+  <div class="col-md-4">
+    <div *ngFor="#c of conferences" class="conf">
+        {{c.name}}
+    </div>
+  </div>
+  <div class="col-md-8">
+  </div>
 </div>
