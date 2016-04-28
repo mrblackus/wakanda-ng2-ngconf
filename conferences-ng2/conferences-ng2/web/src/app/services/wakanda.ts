@@ -1,4 +1,4 @@
-import {WakandaClient} from 'wakanda-client/browser';
+import {WakandaClient} from 'wakanda-client/browser/no-promise';
 
 export class WakandaService {
 
