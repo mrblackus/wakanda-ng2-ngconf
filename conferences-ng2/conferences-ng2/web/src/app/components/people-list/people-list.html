@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-4">
+    <div *ngFor="#p of peopleList" class="people clickable" (click)="clickOnPeople(p)">
+        {{p.name}}
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="people people-detail" *ngIf="currentPeople">
+      <h4>{{currentPeople.name}}</h4>
+      <strong>Attendances ({{currentPeople.conferences._count}}):</strong>
+      <ul>
+        <li *ngFor="#c of currentPeople.conferences.entities">
+          {{c.name}}
+        </li>  
+      </ul>
+    </div>
+  </div>
+</div>

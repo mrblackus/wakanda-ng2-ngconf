@@ -16,10 +16,8 @@ export class ConferenceList implements OnInit {
     this.currentConf = null;
   }
   
-  clickOnConf(c) {
+  public clickOnConf(c) {
     this.currentConf = c;
-    console.log(c);
-    
   }
   
   ngOnInit() {

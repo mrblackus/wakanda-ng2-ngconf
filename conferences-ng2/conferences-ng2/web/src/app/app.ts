@@ -5,6 +5,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 import '../style/app.scss';
 
 import {ConferenceList} from './components/conference-list/conference-list';
+import {PeopleList} from './components/people-list/people-list';
 
 import {WakandaService} from './services/wakanda';
 
@@ -21,7 +22,8 @@ import {WakandaService} from './services/wakanda';
   template: require('./app.html')
 })
 @RouteConfig([
-  {path: '/', component: ConferenceList, name: 'ConferenceList'}
+  {path: '/', component: ConferenceList, name: 'ConferenceList'},
+  {path: '/peoples', component: PeopleList, name: 'PeopleList'}
 ])
 export class App {
 }
