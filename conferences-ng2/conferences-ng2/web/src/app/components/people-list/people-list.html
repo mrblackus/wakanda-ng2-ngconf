@@ -1,3 +1,12 @@
+<h2>People list</h2>
+
+<div class="row">
+  <form class="form-inline" (ngSubmit)="addPeople()">
+    <input [(ngModel)]="newPerson" type="text" class="form-control" placeholder="Name" />
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+</div>
+
 <div class="row">
   <div class="col-md-4">
     <div *ngFor="#p of peopleList" class="people clickable" (click)="clickOnPeople(p)">
