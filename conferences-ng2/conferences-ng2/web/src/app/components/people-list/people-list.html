@@ -24,12 +24,17 @@
       </ul>
       
       <h5>Register to a conference</h5>
-      <form class="form-inline" (ngSubmit)="registerToConference()">
-        <select [(ngModel)]="currentPeopleConfToRegister" class="form-control">
-          <option *ngFor="#c of currentPeopleAvailableConf" [value]="c">{{c.name}}</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Register</button>
-      </form>
+      <div *ngIf="currentPeopleAvailableConf.length > 0">
+        <form class="form-inline" (ngSubmit)="registerToConference()">
+          <select [(ngModel)]="currentPeopleConfToRegister" class="form-control">
+            <option *ngFor="#c of currentPeopleAvailableConf" [value]="c._key">{{c.name}}</option>
+          </select>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+      <div *ngIf="currentPeopleAvailableConf.length == 0">
+        <p>There's no available conference to register to.</p>
+      </div>
     </div>
   </div>
 </div>

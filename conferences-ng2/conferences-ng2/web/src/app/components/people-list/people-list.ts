@@ -11,9 +11,11 @@ export class PeopleList implements OnInit {
   public peopleList: any[];
   public currentPeople: any;
   public newPerson: string;
-  private conferences: any[];
   public currentPeopleAvailableConf: any[];
   public currentPeopleConfToRegister: any;
+  
+  private conferences: any[];
+  private confMap: Map<string, any>;  
   
   constructor(private _wakandaService: WakandaService) {
     this.peopleList = [];
@@ -22,6 +24,7 @@ export class PeopleList implements OnInit {
     this.conferences = [];
     this.currentPeopleAvailableConf = [];
     this.currentPeopleConfToRegister = null;
+    this.confMap = new Map<string, any>();
   }
   
   public clickOnPeople(p) {
@@ -63,6 +66,11 @@ export class PeopleList implements OnInit {
       return this._wakandaService.catalog.then(c => {
         return c['Conference'].query({orderBy: 'name'}).then(col => {
           this.conferences = col.entities;
+          
+          for (let conf of col.entities) {
+            this.confMap.set(conf._key, conf);
+          }
+          
           return col.entities 
         });
       });
@@ -76,7 +84,10 @@ export class PeopleList implements OnInit {
       this.currentPeopleAvailableConf = conferences.filter((conf: any) => {
         return !this.isRegisterToConf(people, conf.name);
       });
-      this.currentPeopleConfToRegister = this.currentPeopleAvailableConf[0];
+      
+      if (this.currentPeopleAvailableConf.length > 0) {
+        this.currentPeopleConfToRegister = this.currentPeopleAvailableConf[0]._key;
+      }
     });
     
   }
@@ -92,17 +103,21 @@ export class PeopleList implements OnInit {
   
   public registerToConference() {
     if (this.currentPeopleConfToRegister) {
-      this._wakandaService.catalog.then(c => {
-        let attended = c['Attended'].create({
-          person: this.currentPeople,
-          conference: this.currentPeopleConfToRegister
-        });
-        attended.save().then(() => {
-          this.currentPeople.fetch({select: 'conferences'}).then(() => {
-            this.getAvailableConferences(this.currentPeople);
+      let conference = this.confMap.get(this.currentPeopleConfToRegister);
+      
+      if (conference) {
+        this._wakandaService.catalog.then(c => {
+          let attended = c['Attended'].create({
+            person: this.currentPeople,
+            conference
+          });
+          attended.save().then(() => {
+            this.currentPeople.fetch({select: 'conferences'}).then(() => {
+              this.getAvailableConferences(this.currentPeople);
+            });
           });
         });
-      });
+      }
     }
   }
 }
