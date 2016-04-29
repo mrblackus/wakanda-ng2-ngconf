@@ -21,6 +21,7 @@
   
   .people-detail {
     text-align: left;
+    min-height: 265px;
     
     h4 {
       text-align: center;
@@ -29,5 +30,18 @@
   
   ul {
     margin-bottom: 40px;
+  }
+  
+  .avatar-block {
+    float: right;
+    font-size: 0.8em;
+    
+    img {
+      display: block;
+      max-width: 200px;
+      max-height: 200px;
+      margin: auto;
+      margin-bottom: 10px;
+    }
   }
 }

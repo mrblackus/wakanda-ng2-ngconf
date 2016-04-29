@@ -15,7 +15,17 @@
   </div>
   <div class="col-md-8">
     <div class="people people-detail" *ngIf="currentPeople">
+      
+      <div class="avatar-block">
+        
+        <img src="{{currentPeople.profilePicture.uri || '/img/avatar-default.png'}}" />
+        
+        <input type="file" id="avatar-input" />
+        <button class="btn btn-sm btn-primary" type="submit" (click)="uploadAvatar()">Upload</button>
+      </div>
+      
       <h4>{{currentPeople.name}}</h4>
+      
       <h5>Attendances ({{currentPeople.conferences._count}}):</h5>
       <ul>
         <li *ngFor="#c of currentPeople.conferences.entities">

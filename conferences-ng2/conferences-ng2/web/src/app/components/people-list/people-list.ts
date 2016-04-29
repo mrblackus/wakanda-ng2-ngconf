@@ -120,4 +120,22 @@ export class PeopleList implements OnInit {
       }
     }
   }
+  
+  public uploadAvatar() {
+    
+    if (!this.currentPeople) {
+      return;
+    }
+    
+    let input = document.getElementById('avatar-input') as HTMLInputElement;
+    let file = input && input.files[0];
+    
+    if (file) {
+      this.currentPeople.profilePicture.upload(file).then(() => {
+        this.currentPeople.fetch({select: 'conferences'}); //Ugly...
+        console.log('upload success');
+        
+      })
+    }
+  }
 }

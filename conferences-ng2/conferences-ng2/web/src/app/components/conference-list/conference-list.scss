@@ -25,5 +25,38 @@
     h4 {
       text-align: center;
     }
+    
+    .attendees-container {
+      flex-flow: row wrap;
+      justify-content: space-around;
+      list-style: none;
+      margin: 0;
+      padding: 0;   
+      display: flex;
+    }
+    
+    .attendees-container > li {
+      text-align: center;
+      margin: 10px;
+      width: 110px;
+      height: 130px;
+      position: relative;      
+      
+      img {
+        margin: auto;
+        max-height: 100px;
+        max-width: 100px;
+        display: block;
+      }
+      
+      span {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
   }
 }

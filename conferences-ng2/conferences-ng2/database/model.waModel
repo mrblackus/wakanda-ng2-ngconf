@@ -174,8 +174,15 @@
 					"scope": "public",
 					"type": "ConferenceCollection",
 					"path": "listAttendance.conference"
+				},
+				{
+					"name": "profilePicture",
+					"scope": "public",
+					"type": "image",
+					"kind": "storage"
 				}
 			]
 		}
-	]
+	],
+	"type": []
 }

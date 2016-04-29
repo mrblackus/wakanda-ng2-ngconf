@@ -14,10 +14,12 @@
   <div class="col-md-8">
     <div class="conf conf-detail" *ngIf="currentConf">
       <h4>{{currentConf.name}}</h4>
-      <strong>Attendees ({{currentConf.people._count}}):</strong>
-      <ul>
+      <h5>Attendees ({{currentConf.people._count}})</h5>
+
+      <ul class="attendees-container">
         <li *ngFor="#p of currentConf.people.entities">
-          {{p.info}}
+          <img src="{{p.profilePicture.uri || '/img/avatar-default.png'}}" />
+          <span>{{p.name}}</span>
         </li>  
       </ul>
     </div>
