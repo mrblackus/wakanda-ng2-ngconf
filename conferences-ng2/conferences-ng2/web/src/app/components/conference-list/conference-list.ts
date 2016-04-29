@@ -7,21 +7,21 @@ import {WakandaService} from '../../services/wakanda';
   template: require('./conference-list.html')
 })
 export class ConferenceList implements OnInit {
-  
+
   public conferences: any[];
   public currentConf: any;
   public newConference: string;
-  
+
   constructor(private _wakandaService: WakandaService) {
     this.conferences = [];
     this.currentConf = null;
     this.newConference = null;
   }
-  
+
   public clickOnConf(c) {
     this.currentConf = c;
   }
-  
+
   public addConference() {
     if (this.newConference) {
       this._wakandaService.catalog.then(c => {
@@ -33,15 +33,15 @@ export class ConferenceList implements OnInit {
       });
     }
   }
-  
-  private loadConferences() {
+
+  public loadConferences() {
     this._wakandaService.catalog.then(c => {
       c['Conference'].query({select: 'people'}).then(collection => {
           this.conferences = collection.entities;
       });
     });
   }
-  
+
   ngOnInit() {
     this.loadConferences();
   }

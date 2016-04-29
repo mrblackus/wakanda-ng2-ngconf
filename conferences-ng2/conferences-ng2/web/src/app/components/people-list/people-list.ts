@@ -7,16 +7,16 @@ import {WakandaService} from '../../services/wakanda';
   template: require('./people-list.html')
 })
 export class PeopleList implements OnInit {
-  
+
   public peopleList: any[];
   public currentPeople: any;
   public newPerson: string;
   public currentPeopleAvailableConf: any[];
   public currentPeopleConfToRegister: any;
-  
+
   private conferences: any[];
   private confMap: Map<string, any>;  
-  
+
   constructor(private _wakandaService: WakandaService) {
     this.peopleList = [];
     this.currentPeople = null;
@@ -26,13 +26,12 @@ export class PeopleList implements OnInit {
     this.currentPeopleConfToRegister = null;
     this.confMap = new Map<string, any>();
   }
-  
+
   public clickOnPeople(p) {
     this.currentPeople = p;
     this.getAvailableConferences(p);
   }
-  
-    
+
   public addPeople() {
     if (this.newPerson) {
       this._wakandaService.catalog.then(c => {
@@ -47,12 +46,11 @@ export class PeopleList implements OnInit {
       });
     }
   }
-  
+
   ngOnInit() {
     this.loadPersons();
   }
-  
-  
+
   private loadPersons() {
     this._wakandaService.catalog.then(c => {
       c['Person'].query({select: 'conferences', orderBy: 'name'}).then(collection => {
@@ -60,7 +58,7 @@ export class PeopleList implements OnInit {
       });
     });
   }
-  
+
   private getAllConferences() {
     if (this.conferences.length === 0) {
       return this._wakandaService.catalog.then(c => {
@@ -78,7 +76,7 @@ export class PeopleList implements OnInit {
     
     return Promise.resolve(this.conferences);
   }
-  
+
   private getAvailableConferences(people: any) {
     this.getAllConferences().then(conferences => {
       this.currentPeopleAvailableConf = conferences.filter((conf: any) => {
@@ -91,7 +89,7 @@ export class PeopleList implements OnInit {
     });
     
   }
-  
+
   private isRegisterToConf(people: any, confName: string) {
     for (let c of people.conferences.entities) {
       if (c.name === confName) {
@@ -100,7 +98,7 @@ export class PeopleList implements OnInit {
     }
     return false;
   }
-  
+
   public registerToConference() {
     if (this.currentPeopleConfToRegister) {
       let conference = this.confMap.get(this.currentPeopleConfToRegister);
@@ -120,22 +118,20 @@ export class PeopleList implements OnInit {
       }
     }
   }
-  
+
   public uploadAvatar() {
-    
+
     if (!this.currentPeople) {
       return;
     }
-    
+
     let input = document.getElementById('avatar-input') as HTMLInputElement;
     let file = input && input.files[0];
-    
+
     if (file) {
       this.currentPeople.profilePicture.upload(file).then(() => {
         this.currentPeople.fetch({select: 'conferences'}); //Ugly...
-        console.log('upload success');
-        
-      })
+      });
     }
   }
 }
