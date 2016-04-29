@@ -72,8 +72,6 @@ export class PeopleList implements OnInit {
   }
   
   private getAvailableConferences(people: any) {
-    console.log('1423');
-    
     this.getAllConferences().then(conferences => {
       this.currentPeopleAvailableConf = conferences.filter((conf: any) => {
         return !this.isRegisterToConf(people, conf.name);
