@@ -13,7 +13,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var defaultOptions = {
     default: {
         serverUrl: 'http://127.0.0.1:8081',
-        port: 8082, //change it to 8000 for use in Wakanda Studio
+        port: 8000, //change it to 8000 for use in Wakanda Studio
         livereloadPort: 35729,
         app: 'app/',
         output: 'app/',

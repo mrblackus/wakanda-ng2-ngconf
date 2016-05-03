@@ -1,0 +1,15 @@
+<ion-navbar *navbar>
+  <ion-title>{{conference.name}}</ion-title>
+</ion-navbar>
+
+<ion-content padding>
+  <h4>Attendees ({{conference.people._count}})</h4>
+  <ion-card *ngFor="#p of conference.people.entities">
+    <img src="{{p.profilePicture.uri | profilePicture}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{p.name}}
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
